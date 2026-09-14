@@ -1,0 +1,408 @@
+/* src/index.css */
+
+:root,
+[data-theme="light"] {
+  --bg-app: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-subtle: #f7f7f8;
+  --bg-input: #ffffff;
+
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b70;
+  --text-muted: #9b9b9f;
+
+  --border: #e2e2e5;
+  --border-strong: #d8d8dc;
+
+  --accent: #6d5bd0;
+  --accent-hover: #5a48bd;
+  --accent-subtle: #f0edfc;
+  --accent-text: #6d5bd0;
+
+  --success: #2e9e5b;
+  --success-subtle: #e8f5ee;
+  --success-text: #2e9e5b;
+  --warning: #c88a00;
+  --warning-subtle: #fdf6e3;
+  --warning-text: #a06e00;
+  --danger: #d33b3b;
+  --danger-subtle: #fbeaea;
+  --danger-text: #d33b3b;
+
+  --progress-track: #e8e8ea;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] {
+  /* -------- Three-tier surface hierarchy -------- */
+  --bg-app: #0f0f12; /* page (darkest) */
+  --bg-surface: #1a1a1f; /* cards, panels */
+  --bg-subtle: #232329; /* nested content, entries, badges */
+  --bg-input: #232329; /* input fields (pop inward) */
+
+  /* -------- Text hierarchy -------- */
+  --text-primary: #f5f5f7;
+  --text-secondary: #9b9ba5;
+  --text-muted: #5c5c66;
+
+  --border: #2a2a30;
+  --border-strong: #3a3a42;
+
+  /* -------- Accent: richer violet -------- */
+  --accent: #7c6cf6;
+  --accent-hover: #8f7fff;
+  --accent-subtle: rgba(124, 108, 246, 0.14);
+  --accent-text: #a699ff;
+
+  /* -------- Status colors: brighter for dark contrast -------- */
+  --success: #4ade80;
+  --success-subtle: rgba(74, 222, 128, 0.12);
+  --success-text: #6ee7a5;
+  --warning: #fbbf24;
+  --warning-subtle: rgba(251, 191, 36, 0.12);
+  --warning-text: #fcd34d;
+  --danger: #f87171;
+  --danger-subtle: rgba(248, 113, 113, 0.12);
+  --danger-text: #fca5a5;
+
+  --progress-track: #232329;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================================
+   Global reset
+   ============================================================ */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  background: var(--bg-app);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+}
+
+input,
+textarea,
+select {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+  -webkit-text-fill-color: var(--text-primary);
+  caret-color: var(--text-primary);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+  -webkit-text-fill-color: var(--text-muted);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+button {
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 6px;
+  border: 2px solid var(--bg-app);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ============================================================
+   Clickable card hover
+   ============================================================ */
+.clickable-card {
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.clickable-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================
+   Chevron + expandable row pattern
+   ============================================================ */
+.chevron {
+  display: inline-block;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+.expandable-card {
+  transition: border-color 0.2s ease;
+}
+
+.expandable-row {
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.expandable-row:hover {
+  background: color-mix(in srgb, var(--text-primary) 3%, transparent);
+}
+
+.expandable-row-chevron-wrap {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.expandable-row:hover .expandable-row-chevron-wrap {
+  background: color-mix(in srgb, var(--text-primary) 7%, transparent);
+  color: var(--text-primary);
+}
+
+.expandable-row-chevron {
+  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+}
+
+.expandable-row-chevron.open {
+  transform: rotate(180deg);
+}
+
+.expandable-content-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.expandable-content-wrapper.open {
+  grid-template-rows: 1fr;
+}
+
+.expandable-content-inner {
+  overflow: hidden;
+}
+
+/* ============================================================
+   Drag handle
+   ============================================================ */
+.drag-handle {
+  color: var(--text-muted, #9b9b9f);
+  cursor: grab;
+  transition: color 0.15s ease;
+  user-select: none;
+  font-size: 15px;
+  letter-spacing: -2px;
+}
+.drag-handle:hover {
+  color: var(--text-primary, #1a1a1a);
+}
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-slide {
+  animation: fadeSlideIn 0.18s ease-out;
+}
+
+@keyframes pulseSaveDot {
+  0% {
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.65);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(74, 222, 128, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0);
+  }
+}
+.save-dot-pulse {
+  animation: pulseSaveDot 0.9s ease-out;
+}
+
+.progress-fill {
+  transition:
+    width 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease;
+}
+
+@keyframes pillIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.pill-animate {
+  animation: pillIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.template-card {
+  transition:
+    transform 0.15s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+.template-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(124, 108, 246, 0.18);
+}
+.template-card.selected {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.clickable-card:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   Section nav (sidebar)
+   ============================================================ */
+.section-nav {
+  display: block;
+}
+
+.section-nav-row {
+  transition:
+    background 0.2s ease,
+    color 0.15s ease;
+}
+
+@media (max-width: 1000px) {
+  .section-nav {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Character-count bar
+   ============================================================ */
+.char-bar-track {
+  height: 4px;
+  background: var(--progress-track, #e8e8ea);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.char-bar-fill {
+  height: 100%;
+  transition:
+    width 0.2s ease,
+    background 0.2s ease;
+}
+
+/* ============================================================
+   Skeleton loader
+   ============================================================ */
+@keyframes shimmer {
+  0% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0.45;
+  }
+}
+
+.skeleton-line {
+  background: var(--bg-subtle, #f7f7f8);
+  border-radius: 5px;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ============================================================
+   Modern polish — subtle depth, soft borders
+   ============================================================ */
+
+/* Cards get a very subtle border in dark mode for crisper edges */
+[data-theme="dark"] .expandable-card,
+[data-theme="dark"] .template-card,
+[data-theme="dark"] section {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Soft shadow utility for elevated elements */
+.elevated {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .elevated {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
