@@ -1,75 +1,60 @@
-# React + TypeScript + Vite
+# Resume Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A local-first, AI-powered resume builder with ATS checking, job matching, and cover letter generation. Built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+> **Bring Your Own Key (BYOK).** This app does not include AI by default. You connect your own API key (Gemini, Grok, OpenRouter, DeepSeek, Ollama, or any OpenAI-compatible endpoint). It's used only for your requests and never leaves your browser.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Resume Builder
+- **All standard sections** — Personal info, Summary, Experience, Education, Projects, Certifications, Skills, Languages, Volunteer, Awards, plus unlimited custom sections
+- **3 templates** — Classic, Modern, Compact
+- **6 accent colors** — used tastefully on the name and section underlines only (body text stays black for ATS safety)
+- **Live PDF preview** with full-view toggle and page-count indicator
+- **Drag-and-drop section reordering**
+- **Present / Unknown date handling** for ongoing or unremembered roles
+- **Company autocomplete** — reuse companies you've typed before
+- **Undo/Redo** — Ctrl+Z / Ctrl+Y across the whole form
+- **Auto-save** — everything persists to your browser
 
-## Expanding the ESLint configuration
+### AI Features (requires your own API key)
+- **Import from PDF** — upload an existing resume and AI fills the form
+- **Write for this job** — generates a targeted professional summary using only your real experience
+- **Skill suggestions** — AI extracts relevant skills from a job description, grouped by category
+- **Refine keyword match** — AI-powered matching that recognizes synonyms (JS ↔ JavaScript, Postgres ↔ PostgreSQL)
+- **Cover letter generator** — 3 tones, editable, exports to PDF
+- **ATS Checker** — overall score, section-by-section breakdown, and top fixes
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Storage
+- **Multiple resumes** — save, rename, duplicate, and drag-reorder them
+- **Auto-save** — every keystroke is persisted
+- **Cover letter per resume** — stored separately
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Design
+- **Dark / light mode** — follows your system preference by default
+- **Minimal, distraction-free UI**
+- **Keyboard shortcuts** — Ctrl+Z undo, Ctrl+Y redo
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 Quick Start
 
-```
+### Prerequisites
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+- **Node.js 18+** — [download](https://nodejs.org)
+- **Git** — [download](https://git-scm.com/download/win) (Windows) or `brew install git` (Mac)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Install and run
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Clone the repo
+git clone https://github.com/alghimire2016/resume.git
+cd resume
 
-```
+# Install dependencies
+npm install
+
+# Start the dev server
+npm run dev
